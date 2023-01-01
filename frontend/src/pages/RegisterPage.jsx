@@ -3,8 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import {ToastContainer, toast} from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css"; // importing the toastify css. Without this the notification will not visible.
-import axios from 'axios'
+import axios from 'axios';
 import { registerRoute } from '../utils/apiRoutes';
+import bckgrnd1 from '../assets/bckgrnd.jpg';
+import bckgrnd2 from '../assets/bckgrnd2.jpg';
 
 
 function RegisterPage() {
@@ -43,9 +45,11 @@ function RegisterPage() {
         const {username,password,confirmPassword} = values;
         if(username.length<3){
             toast.error("Username length should be greater than 3 !", toastOptions);
+            return false;
         }
         if(username===""){
             toast.error("Username is required !", toastOptions);
+            return false;
         }
         if(password.length<5){
             toast.error("Password length should be greater than 5 !", toastOptions);
@@ -92,7 +96,8 @@ flex-direction:column;
 justify-content:center;
 gap:1rem;
 align-items:center;
-background-color: #131324;
+${'' /* background-color: #131324; */}
+background: url(${bckgrnd2});
 .Brand{
     display:flex;
     align-items:center;
@@ -106,7 +111,8 @@ form{
     display:flex;
     flex-direction:column;
     gap: 2rem;
-    background-color: #00000076;
+    ${'' /* background-color: #00000076; */}
+    background-color: #131324;
     border-radius: 2rem;
     padding: 3rem 5rem;
     input{
