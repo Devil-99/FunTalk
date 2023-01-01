@@ -17,3 +17,36 @@ module.exports.registerMiddleware = async (req,res,next)=>{
         next(exception);
     }
 };
+
+
+module.exports.loginMiddleware = async (req,res,next)=>{
+    try{
+        const {username, password} = req.body;
+        const user = await User.findOne({username});
+        if(!user)
+            return res.json({msg:"Incorrect Username", status: false});
+
+        const isPasswordValid = (password === user.password);
+        if(!isPasswordValid)
+            return res.json({msg:"Incorrect Password", status: false});
+
+        return res.json({status:true , user});
+    }
+    catch(exception){
+        next(exception);
+    }
+};
+
+
+module.exports.getAllUsers = async (req,res,next)=>{
+    try{
+        const allusers = await User.find({ _id: {$ne: req.params.id} }).select([
+            "email",
+            "username",
+            "_id"
+        ]);
+        return res.json(allusers);
+    }catch(exception){
+        next(exception);
+    }
+};
