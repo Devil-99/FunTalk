@@ -53,6 +53,9 @@ function ChatPages() {
   const handleChatChange = (chat)=>{
     setCurrentChat(chat);
   }
+
+  
+
   return (<Container>
     <div className='container'>
       <Contacts allcontacts={contacts} currUser={currentUser} changeChat={handleChatChange} />

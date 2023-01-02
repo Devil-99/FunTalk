@@ -27,11 +27,11 @@ module.exports.getAllMessege = async (req,res,next)=>{
                 $all: [from, to],
             },
         }).sort({updatedAt:1});
-
         const projectedMesseges = messeges.map((msg)=>{
             return {
                 fromSelf: msg.sender.toString() === from,
-                messege: msg.messege.text
+                messege: msg.messege.text,
+                messegeId: msg._id
             };
         });
         res.json(projectedMesseges);

@@ -3,12 +3,13 @@ import styled from 'styled-components';
 import Logout from '../components/Logout';
 import ChatInput from '../components/ChatInput';
 import axios from 'axios';
-import {getAllMessegesRoutes, sendMessegeRoute} from '../utils/apiRoutes';
+import { AiFillDelete } from "react-icons/ai";
+import {getAllMessegesRoutes, sendMessegeRoute , deleteMsgRoute} from '../utils/apiRoutes';
 import {v4 as uuidv4} from 'uuid';
 
 export default function ChatContainer({currentChat,currentUser,socket}) {
     const [messeges,setMesseges] = useState([]);
-    const [arrivalMessege,setArrivalMessege] = useState(null); 
+    const [arrivalMessege,setArrivalMessege] = useState(null);
     const scrollRef = useRef();
 
     useEffect(()=>{
@@ -20,18 +21,18 @@ export default function ChatContainer({currentChat,currentUser,socket}) {
             setMesseges(response.data);
         }
         fetchData();
-    },[currentChat])
+    },[currentChat,messeges])
 
 const handleSendMsg = async (msg)=>{
     await axios.post(sendMessegeRoute,{
         from: currentUser._id,
         to: currentChat._id,
-        messege: msg
+        messege: msg,
     });
     socket.current.emit('send-msg',{
         to: currentChat._id,
         from: currentUser._id,
-        messege: msg,
+        messege: msg
     });
 
     const msgs = [...messeges];
@@ -39,21 +40,27 @@ const handleSendMsg = async (msg)=>{
     setMesseges(msgs);
 };
 
+// this useEffect works on my server when any msg recieved from others
 useEffect(()=>{
+    console.log("1st useEffect");
     if(socket.current){
-        socket.current.on('msg-reieved',(msg)=>{
+        socket.current.on('msg-recieved',(msg)=>{
             setArrivalMessege({fromSelf:false, messege:msg});
         })
     }
-},[])
+},[]);
 
+// This useEffect works when sender's server when they send any msg
 useEffect(()=>{
-    arrivalMessege && setMesseges((prev)=>[...prev , arrivalMessege])
+    console.log("2nd useEffect");
+    arrivalMessege && setMesseges((prev)=>[...prev , arrivalMessege]);
 },[arrivalMessege]);
 
 useEffect(()=>{
+    console.log("3rd useEffect");
     scrollRef.current?.scrollIntoView({behaviour:'smooth'});
 },[messeges]);
+
 
   return (
     <>
@@ -128,12 +135,24 @@ overflow: hidden;
         display: flex;
         align-items: center;
         .content{
+            display: flex;
+            flex-direction: row;
             max-width: 50%;
             overflow-wrap: break-word;
             padding: 1rem;
             border-radius: 1rem;
             color: #d1d1d1;
             font-size: 1.3rem;
+            button{
+                padding: 0.5rem;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                svg{
+                    font-size: 1.5rem;
+                    color: color;
+                }
+            }
         }
     }
     .sended{

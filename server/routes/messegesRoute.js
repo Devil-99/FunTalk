@@ -1,5 +1,5 @@
 const express = require('express');
-const { addMessege , getAllMessege } = require('../controller/messegesController');
+const { addMessege , getAllMessege , deleteMsg} = require('../controller/messegesController');
 
 const router = express.Router();
 

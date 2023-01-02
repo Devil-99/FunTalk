@@ -1,22 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Picker from 'emoji-picker-react';
 import {IoMdSend} from 'react-icons/io';
-import {BsEmojiSmileFill} from 'react-icons/bs';
 
 export default function ChatInput({handleSendMsg}) {
     const [msg,setMsg] = useState('');
 
-    const handleEmojiClick = (event,emoji)=>{
-        let messege = msg;
-        messege += emoji.emoji;
-        setMsg(messege);
-    }
-
     const sendMessege = (event)=>{
         event.preventDefault();
         if(msg.length>0){
-            console.log(msg);
             handleSendMsg(msg);
             setMsg('');
         }
