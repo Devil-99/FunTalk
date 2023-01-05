@@ -14,7 +14,7 @@ app.use('/api/auth', userRoutes);
 app.use('/api/messeges', messegeRouter);
 
 mongoose.set('strictQuery', true); // For DeprecationWarning
-mongoose.connect(process.env.MONGO_URL,{
+mongoose.connect(process.env.MONGO_CLOUD_URL,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
     // We pass the useNewUrlParser: true, etc. to mongoose.connect() to avoid the DeprecationWarning.
@@ -29,8 +29,8 @@ app.get('/',(req,res)=>{
     res.end();
 })
 
-const server = app.listen(process.env.PORT,()=>{
-    console.log("Server started on Port-",process.env.PORT);
+const server = app.listen(process.env.PORT || 5000,()=>{
+    console.log("Server started on Port-",process.env.PORT || 5000);
 });
 
 const io = socket(server,{

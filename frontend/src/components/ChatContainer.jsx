@@ -1,17 +1,17 @@
 import React, { useEffect, useState , useRef } from 'react';
 import styled from 'styled-components';
-import Logout from '../components/Logout';
 import ChatInput from '../components/ChatInput';
 import axios from 'axios';
-import { AiFillDelete } from "react-icons/ai";
-import {getAllMessegesRoutes, sendMessegeRoute , deleteMsgRoute} from '../utils/apiRoutes';
+import {getAllMessegesRoutes, sendMessegeRoute } from '../utils/apiRoutes';
 import {v4 as uuidv4} from 'uuid';
+import ChatHeader from './ChatHeader';
 
 export default function ChatContainer({currentChat,currentUser,socket}) {
     const [messeges,setMesseges] = useState([]);
     const [arrivalMessege,setArrivalMessege] = useState(null);
     const scrollRef = useRef();
 
+    // this render the page every second
     useEffect(()=>{
         async function fetchData(){
             const response = await axios.post(getAllMessegesRoutes,{
@@ -21,7 +21,7 @@ export default function ChatContainer({currentChat,currentUser,socket}) {
             setMesseges(response.data);
         }
         fetchData();
-    },[currentChat,messeges])
+    },[currentChat,messeges]);
 
 const handleSendMsg = async (msg)=>{
     await axios.post(sendMessegeRoute,{
@@ -56,34 +56,30 @@ useEffect(()=>{
     arrivalMessege && setMesseges((prev)=>[...prev , arrivalMessege]);
 },[arrivalMessege]);
 
+// this works when new msg send or recieved so that the page scroll down to the end.
+// This also render in every second
 useEffect(()=>{
-    console.log("3rd useEffect");
     scrollRef.current?.scrollIntoView({behaviour:'smooth'});
+    console.log(messeges);
 },[messeges]);
-
 
   return (
     <>
         {
             currentChat && (
                 <Container>
-                    <div className='chat-header'>
-                        <div className='user-details'>
-                            <h1>{currentChat.username}</h1>
-                        </div>
-                        <Logout/>
-                    </div>
+                    <ChatHeader currentChat={currentChat}/>
                     <div className='chat-messeges' >
                         {
                             messeges.map((messege)=>{
                                 return (
-                                    <div ref={scrollRef} key={uuidv4()}>
-                                        <div className={`messege ${messege.fromSelf ? "sended" : "recieved"}`}>
-                                            <div className='content'>
-                                                <p>{messege.messege}</p>
-                                            </div>
+                                <div ref={scrollRef} key={uuidv4()}>
+                                    <div className={`messege ${messege.fromSelf ? "sended" : "recieved"}`}>
+                                        <div className='content'>
+                                            <p>{messege.messege}</p>
                                         </div>
                                     </div>
+                                </div>
                                 )
                             })
                         }
@@ -104,18 +100,6 @@ overflow: hidden;
 @media screen and (min-width: 720px) and (max-width: 1080px){
     grid-template-rows: 10% 80% 10%;
   }
-.chat-header{
-    background-color: ;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 2rem;
-    .user-details{
-        h1{
-            color: white;
-        }
-    }
-}
 .chat-messeges{
     padding: 1rem 1rem;
     display: flex;

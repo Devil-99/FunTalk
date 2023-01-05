@@ -13,10 +13,14 @@ export default function ChatInput({handleSendMsg}) {
         }
     }
 
+    const handleChange = (event)=>{
+        setMsg(event.target.value);
+    }
+
   return (
     <Container>
         <form className='input-container' onSubmit={(event)=>sendMessege(event)}>
-            <input type='text' placeholder='type your messege here' value={msg} onChange={(event)=>setMsg(event.target.value)} />
+            <input type='text' placeholder='type your messege here' value={msg} onChange={handleChange} />
             <button className='submit'>
                 <IoMdSend />
             </button>
