@@ -65,14 +65,19 @@ background-color: #080420;
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    color: white;
+    color: Yellow;
+    @media screen and (min-width: 300px) and (max-width: 500px){
+        h1{
+            font-size: 1.3rem;
+        }        
+    }
 }
 .contacts{
     display: flex;
     flex-direction: column;
     align-items: center;
     overflow: auto;
-    gap: 0.8rem;
+    gap: 0.5rem;
     &::-webkit-scrollbar{
         width: 0.2rem;
         &-thumb{
@@ -85,14 +90,25 @@ background-color: #080420;
         display: flex;
         align-items:center;
         background-color: #ffffff39;
-        min-height: 3rem;
+        min-height: 2rem;
         width: 90%;
         border-radius: 0.3rem;
         padding: 0.5rem;
         gap: 1rem;
         cursor: pointer;
         transition: 0.2s ease-in-out;
+        @media screen and (min-width: 300px) and (max-width: 500px){
+            padding: 0.5rem;    
+            width: 70%;
+            border-radius: 0.5rem;
+        }
         .username{
+            @media screen and (min-width: 300px) and (max-width: 500px){
+                h3{
+                    font-size: 0.8rem;
+                    margin: 0.2rem;
+                }
+            }
             h3{
                 color: white;
             }
@@ -108,8 +124,16 @@ background-color: #080420;
     align-items: center;
     justify-content: center;
     gap: 2rem;
+    @media screen and (min-width: 300px) and (max-width: 500px){
+        gap: 0.2rem;    
+    }
     .username{
         h2{
+            @media screen and (min-width: 300px) and (max-width: 500px){
+                font-size: 1rem;
+                padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+                margin: 0rem;
+            }
             background-color: red;
             padding: 0.5rem 1rem 0.5rem 1rem;
             border-radius: 2rem;
