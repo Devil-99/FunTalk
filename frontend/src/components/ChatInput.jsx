@@ -34,6 +34,9 @@ display: flex;
 align-items: center;
 background-color: #080420;
 padding: 0.5rem 1rem 0.5rem 1rem;
+@media screen and (min-width: 300px) and (max-width: 500px){
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    }
 .input-container{
     display:flex;
     align-items: center;
@@ -41,6 +44,9 @@ padding: 0.5rem 1rem 0.5rem 1rem;
     border-radius: 2rem;
     gap: 2rem;
     background-color: #ffffff34;
+    @media screen and (min-width: 300px) and (max-width: 500px){
+        gap: 1rem;
+    }
     input{
         width: 90%;
         height: 60%;
@@ -55,6 +61,9 @@ padding: 0.5rem 1rem 0.5rem 1rem;
         &:focus{
             outline: none;
         }
+        @media screen and (min-width: 300px) and (max-width: 500px){
+            font-size: 0.7rem;
+        }
     }
     button{
         padding: 0.3rem 2rem;
@@ -64,7 +73,13 @@ padding: 0.5rem 1rem 0.5rem 1rem;
         align-items: center;
         background-color: #9a86f3;
         border: none;
+        @media screen and (min-width: 300px) and (max-width: 500px){
+            padding: 0.2rem 1rem;
+        }
         svg{
+            @media screen and (min-width: 300px) and (max-width: 500px){
+                font-size: 1.5rem;
+            }
             font-size: 2rem;
             color: white;
         }

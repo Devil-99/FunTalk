@@ -89,6 +89,9 @@ gap: 1rem;
   @media screen and (min-width: 720px) and (max-width: 1080px){
     grid-template-columns: 35% 65%;
   }
+  @media screen and (min-width: 300px) and (max-width: 800px){
+    grid-template-columns: 30% 70%;
+  }
 }
 `;
 

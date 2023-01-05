@@ -100,6 +100,9 @@ overflow: hidden;
 @media screen and (min-width: 720px) and (max-width: 1080px){
     grid-template-rows: 10% 80% 10%;
   }
+@media screen and (min-width: 300px) and (max-width: 500px){
+    grid-template-rows: 10% 80% 10%;
+}
 .chat-messeges{
     padding: 1rem 1rem;
     display: flex;
@@ -127,15 +130,12 @@ overflow: hidden;
             border-radius: 1rem;
             color: #d1d1d1;
             font-size: 1.3rem;
-            button{
+            @media screen and (min-width: 300px) and (max-width: 800px){
                 padding: 0.5rem;
-                background-color: transparent;
-                border: none;
-                cursor: pointer;
-                svg{
-                    font-size: 1.5rem;
-                    color: color;
-                }
+                font-size: 1.1rem;
+            }
+            p{
+                margin: 0.2rem;
             }
         }
     }

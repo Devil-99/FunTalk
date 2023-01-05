@@ -18,8 +18,13 @@ background-color: ;
 display: flex;
 justify-content: space-between;
 align-items: center;
-padding: 0 2rem;
+padding: 0 1rem;
 .user-details{
+  @media screen and (min-width: 300px) and (max-width: 500px){
+    h1{
+      font-size: 1.8rem;
+    }
+}
     h1{
         color: white;
     }
