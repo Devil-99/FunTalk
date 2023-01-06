@@ -5,8 +5,7 @@ import {ToastContainer, toast} from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css"; // importing the toastify css. Without this the notification will not visible.
 import axios from 'axios';
 import { registerRoute } from '../utils/apiRoutes';
-import bckgrnd1 from '../assets/bckgrnd.jpg';
-import bckgrnd2 from '../assets/bckgrnd2.jpg';
+import background from '../assets/black1.jpg';
 
 
 function RegisterPage() {
@@ -97,7 +96,7 @@ justify-content:center;
 gap:1rem;
 align-items:center;
 ${'' /* background-color: #131324; */}
-background: url(${bckgrnd2});
+background: url(${background});
 .Brand{
     display:flex;
     align-items:center;

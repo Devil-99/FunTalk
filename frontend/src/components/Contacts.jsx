@@ -43,10 +43,9 @@ export default function Contacts({ allcontacts , currUser , changeChat }) {
                     }
                 </div>
                 <div className='current-user'>
-                    <div className='username'>
+                    <div className='username' onClick={()=>changeCurrentChat(undefined,undefined)}>
                         <h2>{currentUserName}</h2>
                     </div>
-                    <Logout/>
                 </div>
             </Container>
             )
@@ -66,7 +65,7 @@ background-color: #080420;
     justify-content: center;
     gap: 1rem;
     color: Yellow;
-    @media screen and (min-width: 300px) and (max-width: 500px){
+    @media screen and (min-width: 250px) and (max-width: 500px){
         h1{
             font-size: 1.3rem;
         }        
@@ -97,13 +96,13 @@ background-color: #080420;
         gap: 1rem;
         cursor: pointer;
         transition: 0.2s ease-in-out;
-        @media screen and (min-width: 300px) and (max-width: 500px){
+        @media screen and (min-width: 250px) and (max-width: 500px){
             padding: 0.5rem;    
             width: 70%;
             border-radius: 0.5rem;
         }
         .username{
-            @media screen and (min-width: 300px) and (max-width: 500px){
+            @media screen and (min-width: 250px) and (max-width: 500px){
                 h3{
                     font-size: 0.8rem;
                     margin: 0.2rem;
@@ -124,12 +123,13 @@ background-color: #080420;
     align-items: center;
     justify-content: center;
     gap: 2rem;
-    @media screen and (min-width: 300px) and (max-width: 500px){
+    @media screen and (min-width: 250px) and (max-width: 500px){
         gap: 0.2rem;    
     }
     .username{
+        cursor: pointer;
         h2{
-            @media screen and (min-width: 300px) and (max-width: 500px){
+            @media screen and (min-width: 250px) and (max-width: 500px){
                 font-size: 1rem;
                 padding: 0.25rem 0.5rem 0.25rem 0.5rem;
                 margin: 0rem;
@@ -138,6 +138,7 @@ background-color: #080420;
             padding: 0.5rem 1rem 0.5rem 1rem;
             border-radius: 2rem;
             color:white;
+            margin:0;
         }
     }
     @media screen and (min-width: 720px) and (max-width: 1080px){

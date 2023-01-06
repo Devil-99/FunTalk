@@ -7,8 +7,7 @@ import Contacts from '../components/Contacts';
 import Welcome from '../components/Welcome';
 import ChatContainer from '../components/ChatContainer';
 import {io} from 'socket.io-client';
-import bckgrnd1 from '../assets/bckgrnd.jpg';
-import bckgrnd2 from '../assets/bckgrnd2.jpg';
+import background from '../assets/black1.jpg';
 
 function ChatPages() {
   const navigate = useNavigate();
@@ -20,6 +19,7 @@ function ChatPages() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(()=>{
+    // console.log("1st useEffect");
     async function getData(){
       if(!localStorage.getItem("chat-app-user")){
         navigate('/login');
@@ -32,8 +32,9 @@ function ChatPages() {
   getData();
   },[]);
 
-  // scoket connection establishment
+  // socket connection establishment
   useEffect(()=>{
+    // console.log("2nd useEffect");
     if(currentUser){
       socket.current=io(host);
       socket.current.emit('add-user',currentUser._id);
@@ -41,6 +42,7 @@ function ChatPages() {
   },[currentUser]);
 
   useEffect(()=>{
+    // console.log("3rd useEffect");
     async function fetchCurrentUser(){
       if(currentUser){
         const data = await axios.get(`${allUsersRoute}/${currentUser._id}`);
@@ -53,8 +55,6 @@ function ChatPages() {
   const handleChatChange = (chat)=>{
     setCurrentChat(chat);
   }
-
-  
 
   return (<Container>
     <div className='container'>
@@ -77,11 +77,15 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 ${'' /* background-color: #131324; */}
-background: url(${bckgrnd1});
+background: url(${background});
 gap: 1rem;
 .container{
   height: 85vh;
   width: 85vw;
+  @media screen and (min-width: 250px) and (max-width: 800px){
+    height: 95vh;
+    width: 99vw;
+  }
   ${'' /* background-color: #00000076; */}
   background-color: #131324;
   display: grid;
@@ -89,7 +93,7 @@ gap: 1rem;
   @media screen and (min-width: 720px) and (max-width: 1080px){
     grid-template-columns: 35% 65%;
   }
-  @media screen and (min-width: 300px) and (max-width: 800px){
+  @media screen and (min-width: 250px) and (max-width: 800px){
     grid-template-columns: 32% 68%;
   }
 }

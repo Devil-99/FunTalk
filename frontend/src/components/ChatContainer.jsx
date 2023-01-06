@@ -11,17 +11,18 @@ export default function ChatContainer({currentChat,currentUser,socket}) {
     const [arrivalMessege,setArrivalMessege] = useState(null);
     const scrollRef = useRef();
 
+    async function fetchData(){
+        const response = await axios.post(getAllMessegesRoutes,{
+            from: currentUser._id,
+            to: currentChat._id,
+        });
+        setMesseges(response.data);
+    }
+
     // this render the page every second
     useEffect(()=>{
-        async function fetchData(){
-            const response = await axios.post(getAllMessegesRoutes,{
-                from: currentUser._id,
-                to: currentChat._id,
-            });
-            setMesseges(response.data);
-        }
         fetchData();
-    },[currentChat,messeges]);
+    },[currentChat]);
 
 const handleSendMsg = async (msg)=>{
     await axios.post(sendMessegeRoute,{
@@ -40,9 +41,9 @@ const handleSendMsg = async (msg)=>{
     setMesseges(msgs);
 };
 
-// this useEffect works on my server when any msg recieved from others
+// this useEffect works for 1st time render to setup the socket.
 useEffect(()=>{
-    console.log("1st useEffect");
+    console.log("2nd useEffect");
     if(socket.current){
         socket.current.on('msg-recieved',(msg)=>{
             setArrivalMessege({fromSelf:false, messege:msg});
@@ -50,17 +51,17 @@ useEffect(()=>{
     }
 },[]);
 
-// This useEffect works when sender's server when they send any msg
+// This useEffect works when any msg arrived.
 useEffect(()=>{
-    console.log("2nd useEffect");
+    console.log(arrivalMessege);
     arrivalMessege && setMesseges((prev)=>[...prev , arrivalMessege]);
 },[arrivalMessege]);
 
 // this works when new msg send or recieved so that the page scroll down to the end.
-// This also render in every second
 useEffect(()=>{
+    console.log("4th useEffect");
+    fetchData();
     scrollRef.current?.scrollIntoView({behaviour:'smooth'});
-    console.log(messeges);
 },[messeges]);
 
   return (
@@ -97,12 +98,6 @@ display: grid;
 grid-template-rows: 10% 80% 10%;
 gap: 0.1rem;
 overflow: hidden;
-@media screen and (min-width: 720px) and (max-width: 1080px){
-    grid-template-rows: 10% 80% 10%;
-  }
-@media screen and (min-width: 300px) and (max-width: 500px){
-    grid-template-rows: 10% 80% 10%;
-}
 .chat-messeges{
     padding: 1rem 1rem;
     display: flex;
@@ -130,12 +125,14 @@ overflow: hidden;
             border-radius: 1rem;
             color: #d1d1d1;
             font-size: 1.3rem;
-            @media screen and (min-width: 300px) and (max-width: 800px){
+            @media screen and (min-width: 250px) and (max-width: 800px){
                 padding: 0.5rem;
-                font-size: 1.1rem;
             }
             p{
                 margin: 0.2rem;
+                @media screen and (min-width: 250px) and (max-width: 800px){
+                    font-size: 0.8rem;
+            }
             }
         }
     }

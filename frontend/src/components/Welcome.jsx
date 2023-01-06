@@ -1,6 +1,7 @@
 import React from 'react';
 import Robot from '../assets/robot.gif';
 import styled from 'styled-components';
+import ChatHeader from './ChatHeader';
 
 export default function Welcome({currUser}) {
   return (
@@ -8,11 +9,15 @@ export default function Welcome({currUser}) {
       {
         currUser && (
           <Container>
-            <img src={Robot} alt="robot"/>
-            <h1>
-                Welcome,<span>{currUser.username}!</span>
-            </h1>
-            <h3>Please select a chat to start messeging</h3>
+            <ChatHeader currentChat={currUser}/>
+            <div className='mainBlock'>
+              <img src={Robot} alt="robot"/>
+              <h1>
+                  Welcome,<span>{currUser.username}!</span>
+              </h1>
+              <h3>Please select a chat to start messaging</h3>
+              <h3>Click on Your Name to back to Welcome page</h3>
+            </div>
           </Container>
         )
       }
@@ -22,26 +27,31 @@ export default function Welcome({currUser}) {
 }
 
 const Container = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
+display: grid;
+grid-template-rows: 10% 80% 10%;
 color: white;
-@media screen and (min-width: 300px) and (max-width: 500px){
-h1{
-  font-size: 1.5rem;
-}
-h3{
-  font-size: 1rem;
-}
-}
-img{
-  @media screen and (min-width: 300px) and (max-width: 500px){
-    height: 15rem;
+overflow: hidden;
+.mainBlock{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @media screen and (min-width: 250px) and (max-width: 500px){
+  h1{
+    font-size: 1.2rem;
   }
-    height: 20rem;
-}
-span{
-    color: #00ff00;
+  h3{
+    font-size: 0.8rem;
+  }
+  }
+  img{
+    @media screen and (min-width: 250px) and (max-width: 500px){
+      height: 15rem;
+    }
+      height: 20rem;
+  }
+  span{
+      color: #00ff00;
+  }
 }
 `;

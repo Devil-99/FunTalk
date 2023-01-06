@@ -5,16 +5,15 @@ import {ToastContainer, toast} from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css"; // importing the toastify css. Without this the notification will not visible.
 import axios from 'axios';
 import { loginRoute } from '../utils/apiRoutes';
-import bckgrnd1 from '../assets/bckgrnd.jpg';
-import bckgrnd2 from '../assets/bckgrnd2.jpg';
+import background from '../assets/black1.jpg';
 
 
 function LoginPage() {
 
     const navigate = useNavigate();
     const [values,setValues] = useState({
-        username:"Abc",
-        password:"12345"
+        username:"",
+        password:""
     });
 
     const handleSubmit = async (event)=>{
@@ -55,7 +54,7 @@ function LoginPage() {
     const handleChange = (e)=>{
         setValues({...values,[e.target.name]:e.target.value });
     }
-
+// console.log("Login Page");
   return (
     <>
         <FormContainer>
@@ -83,7 +82,7 @@ justify-content:center;
 gap:1rem;
 align-items:center;
 ${'' /* background-color: #131324; */}
-background: url(${bckgrnd1});
+background: url(${background});
 .Brand{
     display:flex;
     align-items:center;
