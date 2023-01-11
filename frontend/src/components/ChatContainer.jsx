@@ -60,7 +60,6 @@ useEffect(()=>{
 // this works when new msg send or recieved so that the page scroll down to the end.
 useEffect(()=>{
     console.log("4th useEffect");
-    fetchData();
     scrollRef.current?.scrollIntoView({behaviour:'smooth'});
 },[messeges]);
 
@@ -78,6 +77,7 @@ useEffect(()=>{
                                     <div className={`messege ${messege.fromSelf ? "sended" : "recieved"}`}>
                                         <div className='content'>
                                             <p>{messege.messege}</p>
+                                            <i>{messege.date}</i>
                                         </div>
                                     </div>
                                 </div>
@@ -118,7 +118,7 @@ overflow: hidden;
         align-items: center;
         .content{
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             max-width: 50%;
             overflow-wrap: break-word;
             padding: 1rem;
@@ -127,6 +127,17 @@ overflow: hidden;
             font-size: 1.3rem;
             @media screen and (min-width: 250px) and (max-width: 800px){
                 padding: 0.5rem;
+            }
+            i{
+                display:none;
+                font-size:0.8rem;
+                margin-left: 2rem;
+            }
+            &:hover{
+                i{
+                color:grey;
+                display:block;
+                }
             }
             p{
                 margin: 0.2rem;

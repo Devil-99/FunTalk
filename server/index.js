@@ -35,7 +35,7 @@ const server = app.listen(process.env.PORT || 5000,()=>{
 
 const io = socket(server,{
     cors: {
-        origin: 'https://fun-talk.netlify.app',
+        origin: process.env.LOCAL_ORIGIN,
         credentials: true,
     },
 });
