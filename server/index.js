@@ -55,4 +55,11 @@ io.on('connection',(socket)=>{
             socket.to(sendUserSocket).emit('msg-recieved',data.messege);
         }
     });
+
+    socket.on('delete-msg',(data)=>{
+        const sendUserSocket = onlineUsers.get(data.to);
+        if(sendUserSocket){
+            socket.to(sendUserSocket).emit('msg-deleted');
+        }
+    });
 });
