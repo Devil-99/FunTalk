@@ -56,10 +56,10 @@ io.on('connection',(socket)=>{
         }
     });
 
-    // socket.on('delete-msg',(data)=>{
-    //     const sendUserSocket = onlineUsers.get(data.to);
-    //     if(sendUserSocket){
-    //         socket.to(sendUserSocket).emit('msg-deleted');
-    //     }
-    // });
+    socket.on('delete-msg',(data)=>{
+        const sendUserSocket = onlineUsers.get(data.to);
+        if(sendUserSocket){
+            socket.to(sendUserSocket).emit('msg-deleted');
+        }
+    });
 });

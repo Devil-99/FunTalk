@@ -159,7 +159,7 @@ overflow: hidden;
                 margin: 0.2rem;
                 @media screen and (min-width: 250px) and (max-width: 800px){
                     font-size: 0.8rem;
-            }
+                }
             }
             .delete{
                 background:none;
@@ -173,6 +173,7 @@ overflow: hidden;
                     }
                 }
             }
+        }
     }
     .sended{
         justify-content: flex-end;
