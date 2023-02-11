@@ -19,7 +19,6 @@ function ChatPages() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(()=>{
-    // console.log("1st useEffect");
     async function getData(){
       if(!localStorage.getItem("chat-app-user")){
         navigate('/login');
@@ -34,7 +33,6 @@ function ChatPages() {
 
   // socket connection establishment
   useEffect(()=>{
-    // console.log("2nd useEffect");
     if(currentUser){
       socket.current=io(host);
       socket.current.emit('add-user',currentUser._id);
@@ -42,7 +40,6 @@ function ChatPages() {
   },[currentUser]);
 
   useEffect(()=>{
-    // console.log("3rd useEffect");
     async function fetchCurrentUser(){
       if(currentUser){
         const data = await axios.get(`${allUsersRoute}/${currentUser._id}`);

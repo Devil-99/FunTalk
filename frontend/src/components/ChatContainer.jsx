@@ -2,9 +2,10 @@ import React, { useEffect, useState , useRef } from 'react';
 import styled from 'styled-components';
 import ChatInput from '../components/ChatInput';
 import axios from 'axios';
-import {getAllMessegesRoutes, sendMessegeRoute } from '../utils/apiRoutes';
+import {getAllMessegesRoutes, sendMessegeRoute, deleteMessegeRoutes  } from '../utils/apiRoutes';
 import {v4 as uuidv4} from 'uuid';
 import ChatHeader from './ChatHeader';
+import {MdDelete} from 'react-icons/md';
 
 export default function ChatContainer({currentChat,currentUser,socket}) {
     const [messeges,setMesseges] = useState([]);
@@ -19,7 +20,7 @@ export default function ChatContainer({currentChat,currentUser,socket}) {
         setMesseges(response.data);
     }
 
-    // this render the page every second
+    // this render the page whenever a chat is selected
     useEffect(()=>{
         fetchData();
     },[currentChat]);
@@ -41,17 +42,30 @@ const handleSendMsg = async (msg)=>{
     setMesseges(msgs);
 };
 
+const deleteMsg = async (msg)=>{
+    await axios.post(deleteMessegeRoutes,{
+        msgID:msg.messegeId
+    });
+    await fetchData();
+    socket.current.emit('delete-msg',{
+        to: currentChat._id,
+    });
+}
+
 // this useEffect works for 1st time render to setup the socket.
 useEffect(()=>{
     console.log("2nd useEffect");
     if(socket.current){
         socket.current.on('msg-recieved',(msg)=>{
             setArrivalMessege({fromSelf:false, messege:msg});
-        })
+        });
+        socket.current.on('msg-deleted',()=>{
+            fetchData();
+        });
     }
 },[]);
 
-// This useEffect works when any msg arrived.
+// This useEffect works when any msg received.
 useEffect(()=>{
     console.log(arrivalMessege);
     arrivalMessege && setMesseges((prev)=>[...prev , arrivalMessege]);
@@ -77,7 +91,9 @@ useEffect(()=>{
                                     <div className={`messege ${messege.fromSelf ? "sended" : "recieved"}`}>
                                         <div className='content'>
                                             <p>{messege.messege}</p>
-                                            <i>{messege.date}</i>
+                                            { messege.fromSelf===true ? 
+                                                (<button className='delete' onClick={(event)=>deleteMsg(messege)}><MdDelete/></button>)
+                                            :<></>}
                                         </div>
                                     </div>
                                 </div>
@@ -118,7 +134,7 @@ overflow: hidden;
         align-items: center;
         .content{
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             max-width: 50%;
             overflow-wrap: break-word;
             padding: 1rem;
@@ -145,7 +161,18 @@ overflow: hidden;
                     font-size: 0.8rem;
             }
             }
-        }
+            .delete{
+                background:none;
+                border:none;
+                cursor: pointer;
+                svg{
+                    margin:0;
+                    font-size: 1.8rem;
+                    @media screen and (min-width: 250px) and (max-width: 800px){
+                        font-size: 0.8rem;
+                    }
+                }
+            }
     }
     .sended{
         justify-content: flex-end;
