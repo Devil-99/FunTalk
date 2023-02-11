@@ -53,12 +53,17 @@ module.exports.deleteMessege = async (req,res,next)=>{
         const deletedMsg= await messegeModel.deleteOne({
             _id:msgID
         });
-        if(deletedMsg)
+        if(deletedMsg){
+            console.log("Messege deleted successfully");
             return res.json({msg: "Messege deleted successfully"})
-        else
+        }
+        else{
+            console.log("Failed to delete messege to the database");
             return res.json({msg: "Failed to delete messege to the database"})
+        }
     }
     catch(exc){
+        console.log("Exception occured while deleting");
         next(exc);
     }
 };
