@@ -32,7 +32,7 @@ export default function ChatInput({handleSendMsg}) {
 const Container = styled.div`
 display: flex;
 align-items: center;
-background-color: #080420;
+background-color: #131324;
 padding: 0.5rem 1rem 0.5rem 1rem;
 @media screen and (min-width: 250px) and (max-width: 500px){
     padding: 0.5rem 1rem 0.5rem 1rem;

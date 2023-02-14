@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Logout from './Logout';
 
 export default function Contacts({ allcontacts , currUser , changeChat }) {
 
@@ -58,7 +57,8 @@ const Container = styled.div`
 display: grid;
 grid-template-rows: 10% 80% 10%;
 overflow: hidden;
-background-color: #080420;
+background-color: #0C0C1B;
+border-radius: 1rem;
 .brand{
     display: flex;
     align-items: center;
@@ -88,10 +88,10 @@ background-color: #080420;
     .contact{
         display: flex;
         align-items:center;
-        background-color: #ffffff39;
+        background-color: #14142D;
         min-height: 2rem;
         width: 90%;
-        border-radius: 0.3rem;
+        border-radius: 2rem;
         padding: 0.5rem;
         gap: 1rem;
         cursor: pointer;
@@ -102,23 +102,27 @@ background-color: #080420;
             border-radius: 0.5rem;
         }
         .username{
+            overflow: hidden;
+            margin-left: 1rem;
+            h3{
+                color: white;
+            }
             @media screen and (min-width: 250px) and (max-width: 500px){
+                margin-left: 0.2rem;
                 h3{
                     font-size: 0.8rem;
                     margin: 0.2rem;
                 }
             }
-            h3{
-                color: white;
-            }
+            
         }
     }
     .selected{
-        background-color: #9186f3;
+        background-color: #FB3B13 ;
+        background-image: linear-gradient(to right,#FB3B13, #FEBB45);
     }
 }
 .current-user{
-    ${'' /* background-color: #0d0d30; */}
     display: flex;
     align-items: center;
     justify-content: center;

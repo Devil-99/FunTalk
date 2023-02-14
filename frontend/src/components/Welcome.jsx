@@ -31,6 +31,7 @@ display: grid;
 grid-template-rows: 10% 80% 10%;
 color: white;
 overflow: hidden;
+background-color: #0D0D11;
 .mainBlock{
   display:flex;
   flex-direction: column;

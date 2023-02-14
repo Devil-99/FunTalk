@@ -14,7 +14,7 @@ export default function ChatHeader({currentChat}) {
 };
 
 const Container = styled.div`
-background-color: ;
+background-color: #131324;
 display: flex;
 justify-content: space-between;
 align-items: center;

@@ -73,25 +73,24 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-${'' /* background-color: #131324; */}
 background: url(${background});
 gap: 1rem;
 .container{
   height: 85vh;
   width: 85vw;
   @media screen and (min-width: 250px) and (max-width: 800px){
-    height: 95vh;
+    padding-top: 4rem;
+    height: 90vh;
     width: 99vw;
   }
-  ${'' /* background-color: #00000076; */}
-  background-color: #131324;
+  background-color: none;
   display: grid;
-  grid-template-columns: 25% 75%;
-  @media screen and (min-width: 720px) and (max-width: 1080px){
-    grid-template-columns: 35% 65%;
-  }
+  grid-template-columns: 25% 70%;
+  gap: 2rem;
+
   @media screen and (min-width: 250px) and (max-width: 800px){
-    grid-template-columns: 32% 68%;
+    grid-template-columns: 30% 65%;
+    gap: 0.5rem;
   }
 }
 `;

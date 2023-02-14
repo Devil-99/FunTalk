@@ -112,15 +112,15 @@ useEffect(()=>{
 const Container = styled.div`
 display: grid;
 grid-template-rows: 10% 80% 10%;
-gap: 0.1rem;
 overflow: hidden;
+border-radius: 1rem;
 .chat-messeges{
-    padding: 1rem 1rem;
+    padding: 1rem 1.5rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
     overflow: auto;
-    background-color: #00000075;
+    background-color: #0D0D11;
     &::-webkit-scrollbar{
         width: 0.2rem;
         &-thumb{
@@ -137,13 +137,9 @@ overflow: hidden;
             flex-direction: row;
             max-width: 50%;
             overflow-wrap: break-word;
-            padding: 1rem;
             border-radius: 1rem;
             color: #d1d1d1;
             font-size: 1.3rem;
-            @media screen and (min-width: 250px) and (max-width: 800px){
-                padding: 0.5rem;
-            }
             i{
                 display:none;
                 font-size:0.8rem;
@@ -178,15 +174,25 @@ overflow: hidden;
     .sended{
         justify-content: flex-end;
         .content{
-            background-color: #37d7bf;
-            color: black;
+            padding: 1rem 0 1rem 1rem;
+            background-color: #56D2FE;
+            color: white;
+            background-image: linear-gradient(to left, #56D2FE, #202FFF);
+            @media screen and (min-width: 250px) and (max-width: 800px){
+                padding: 0.5rem 0 0.5rem 0.5rem;
+            }
         }
     }
     .recieved{
         justify-content: flex-start;
         .content{
-            background-color: #ffc0cb;
+            padding: 1rem;
+            background-color: #FF8FB3;
+            background-image: linear-gradient(to left, #FF8FB3, #FAC8F4);
             color: black;
+            @media screen and (min-width: 250px) and (max-width: 800px){
+                padding: 0.5rem;
+            }
         }
     }
 }
